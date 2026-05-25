@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Login | Book Store{% endblock %}
+
+{% block body %}
+
+<body class="admin-login-page">
+
+  <div class="login-box">
+
+    <div class="login-logo">
+      Book<span>Store</span>
+    </div>
+
+    <p class="login-subtitle">
+      Admin Panel Access
+    </p>
+
+    <form onsubmit="handleLogin(event)">
+
+      <input type="text"
+             id="username"
+             placeholder="Enter Username"
+             required>
+
+      <input type="password"
+             id="password"
+             placeholder="Enter Password"
+             required>
+
+      <button type="submit">
+        Login
+      </button>
+
+      <a href="{{ url_for('home') }}" class="back-btn">
+        Back to Store
+      </a>
+
+    </form>
+
+    <p class="login-error" id="loginError">
+      Invalid username or password!
+    </p>
+
+  </div>
+
+  <script src="{{ url_for('static', filename='js/admin-login.js') }}"></script>
+
+</body>
+
+{% endblock %}

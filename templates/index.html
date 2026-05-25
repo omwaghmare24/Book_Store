@@ -1,0 +1,336 @@
+{% extends 'base.html' %}
+
+{% block title %}Online Book Store{% endblock %}
+
+{% block content %}
+
+<!-- Home -->
+<section class="home">
+
+  <div class="home-content">
+
+    <h1>
+      Welcome to <br>
+      <span>Online Book Store</span>
+    </h1>
+
+    <p>
+      Discover your favorite books from different categories.
+      Read, explore, and enjoy the best collection of books online.
+    </p>
+
+    <a href="#books" class="btn">
+      Explore Books
+    </a>
+
+  </div>
+
+  <div class="home-image">
+
+    <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=1000&auto=format&fit=crop"
+         alt="Books">
+
+  </div>
+
+</section>
+
+<!-- About -->
+<section class="about" id="about">
+
+  <div class="about-container">
+
+    <div class="about-image">
+
+      <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=1000&auto=format&fit=crop"
+           alt="Book Store">
+
+    </div>
+
+    <div class="about-content">
+
+      <h2>About Our Online Book Store</h2>
+
+      <p class="short-text">
+        Welcome to our Online Book Store,
+        your one-stop destination for discovering amazing books.
+      </p>
+
+      <div class="more-text">
+
+        <p>
+          We provide fiction, technology,
+          history, education, and motivational books.
+        </p>
+
+        <p>
+          Our mission is to make reading simple,
+          affordable, and accessible for everyone.
+        </p>
+
+      </div>
+
+      <button class="about-btn" onclick="toggleAbout(this)">
+        Explore More
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- Popular Books -->
+<section class="books" id="books">
+
+  <h2>Popular Books</h2>
+
+  <div class="book-container">
+
+    {% if books %}
+
+      {% for book in books %}
+
+      <div class="book-card">
+
+        <img src="{{ book.image }}"
+             alt="{{ book.name }}"
+             onerror="this.src='https://via.placeholder.com/200x280?text=No+Image'">
+
+        <h3>{{ book.name }}</h3>
+
+        <p>Author: {{ book.author }}</p>
+
+        <span>{{ book.price }}</span>
+
+        <button class="book-btn"
+                onclick="openPopup('{{ book.name }}','{{ book.price }}')">
+          Buy Now
+        </button>
+
+      </div>
+
+      {% endfor %}
+
+    {% else %}
+
+      <p style="text-align:center;color:#94a3b8;width:100%;padding:30px 0;">
+        No books available yet. Check back soon!
+      </p>
+
+    {% endif %}
+
+  </div>
+
+</section>
+
+<!-- Order Popup -->
+<div id="popupForm" class="popup">
+
+  <div class="popup-content">
+
+    <span class="close" onclick="closePopup()">
+      &times;
+    </span>
+
+    <h2>Order Confirmation</h2>
+
+    <form onsubmit="confirmOrder(event)">
+
+      <input type="text" id="bookName" readonly>
+
+      <input type="text" id="bookPrice" readonly>
+
+      <input type="text"
+             id="customerName"
+             placeholder="Enter Your Name"
+             required>
+
+      <input type="email"
+             id="customerEmail"
+             placeholder="Enter Your Email"
+             required>
+
+      <button type="submit">
+        Confirm Order
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+<!-- Categories -->
+<section class="categories" id="categories">
+
+  <h2 class="section-title">
+    Book Categories
+  </h2>
+
+  <div class="category-container">
+
+    {% if categories %}
+
+      {% for category in categories %}
+
+      <div class="category-card">
+
+        <input type="checkbox"
+               id="cat-{{ loop.index }}">
+
+        <label for="cat-{{ loop.index }}"
+               class="category-title">
+          {{ category.name }}
+        </label>
+
+        <div class="category-books">
+
+          {% for book in category.books %}
+
+          <div class="book-item">
+
+            <img src="{{ book.image }}"
+                 alt="{{ book.name }}"
+                 onerror="this.src='https://via.placeholder.com/200x280?text=No+Image'">
+
+            <h4>{{ book.name }}</h4>
+
+            <p>{{ book.price }}</p>
+
+            <button class="book-btn"
+                    onclick="openPopup('{{ book.name }}','{{ book.price }}')">
+              Buy Now
+            </button>
+
+          </div>
+
+          {% else %}
+
+          <p style="color:#94a3b8;padding:10px 0;">
+            No books in this category yet.
+          </p>
+
+          {% endfor %}
+
+        </div>
+
+      </div>
+
+      {% endfor %}
+
+    {% else %}
+
+      <p style="text-align:center;color:#94a3b8;width:100%;padding:30px 0;">
+        No categories available yet.
+      </p>
+
+    {% endif %}
+
+  </div>
+
+</section>
+
+<!-- Best Sellers -->
+<section class="books" id="best-sellers">
+
+  <h2>Best Sellers</h2>
+
+  <div class="book-container">
+
+    {% if best_sellers %}
+
+      {% for book in best_sellers %}
+
+      <div class="book-card">
+
+        <img src="{{ book.image }}"
+             alt="{{ book.name }}"
+             onerror="this.src='https://via.placeholder.com/200x280?text=No+Image'">
+
+        <h3>{{ book.name }}</h3>
+
+        <p>Author: {{ book.author }}</p>
+
+        <span>{{ book.price }}</span>
+
+        <button class="book-btn"
+                onclick="openPopup('{{ book.name }}','{{ book.price }}')">
+          Buy Now
+        </button>
+
+      </div>
+
+      {% endfor %}
+
+    {% else %}
+
+      <p style="text-align:center;color:#94a3b8;width:100%;padding:30px 0;">
+        No best sellers yet. Add books from the admin panel.
+      </p>
+
+    {% endif %}
+
+  </div>
+
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+
+  <h2 class="contact-title">
+    Contact Us
+  </h2>
+
+  <div class="contact-container">
+
+    <div class="contact-info">
+
+      <h3>Get In Touch</h3>
+
+      <p>
+        Have questions about books or orders?
+        Feel free to contact us.
+      </p>
+
+      <div class="info-box">
+        <strong>Email:</strong>
+        bookstore@gmail.com
+      </div>
+
+      <div class="info-box">
+        <strong>Phone:</strong>
+        +91 9876543210
+      </div>
+
+    </div>
+
+    <form class="contact-form"
+          onsubmit="handleContact(event)">
+
+      <input type="text"
+             placeholder="Enter Your Name"
+             required>
+
+      <input type="email"
+             placeholder="Enter Your Email"
+             required>
+
+      <input type="text"
+             placeholder="Subject"
+             required>
+
+      <textarea placeholder="Your Message"
+                rows="6"
+                required></textarea>
+
+      <button type="submit">
+        Send Message
+      </button>
+
+    </form>
+
+  </div>
+
+</section>
+
+{% endblock %}

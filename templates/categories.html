@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+
+{% block title %}Categories | Admin{% endblock %}
+
+{% block body %}
+
+<body class="admin-page">
+
+<!-- Sidebar -->
+<div class="sidebar">
+
+    <div class="sidebar-logo">
+        Book<span>Store</span>
+    </div>
+
+    <ul>
+
+        <li>
+            <a href="{{ url_for('admin_dashboard') }}">
+                <i class="fa-solid fa-chart-line"></i>
+                Dashboard
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('add_books') }}">
+                <i class="fa-solid fa-book"></i>
+                Books
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('categories') }}" class="active">
+                <i class="fa-solid fa-layer-group"></i>
+                Categories
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('orders') }}">
+                <i class="fa-solid fa-cart-shopping"></i>
+                Orders
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('customers') }}">
+                <i class="fa-solid fa-users"></i>
+                Customers
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('admin_login') }}">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('home') }}">
+                <i class="fa-solid fa-globe"></i>
+                Front Page
+            </a>
+        </li>
+
+    </ul>
+
+</div>
+
+<!-- Main -->
+<div class="main">
+
+    <div class="topbar">
+        <h1 id="pageTitle">Categories</h1>
+    </div>
+
+    <div class="category-page">
+
+        <div class="category-header">
+            <h2>Manage Categories</h2>
+        </div>
+
+        <!-- Category Form -->
+        <form class="category-form" onsubmit="addCategory(event)">
+
+            <input type="text"
+                   id="catName"
+                   placeholder="Category Name *"
+                   required>
+
+            <select id="catIcon">
+
+                <option value="fa-solid fa-book-open">
+                    📖 Fiction
+                </option>
+
+                <option value="fa-solid fa-code">
+                    💻 Technology
+                </option>
+
+                <option value="fa-solid fa-landmark">
+                    🏛️ History
+                </option>
+
+                <option value="fa-solid fa-graduation-cap">
+                    🎓 Education
+                </option>
+
+                <option value="fa-solid fa-dumbbell">
+                    💪 Motivation
+                </option>
+
+                <option value="fa-solid fa-coins">
+                    💰 Finance
+                </option>
+
+                <option value="fa-solid fa-brain">
+                    🧠 Self Help
+                </option>
+
+                <option value="fa-solid fa-scroll">
+                    📜 Biography
+                </option>
+
+                <option value="fa-solid fa-heart">
+                    ❤️ Romance
+                </option>
+
+                <option value="fa-solid fa-flask">
+                    🔬 Science
+                </option>
+
+                <option value="fa-solid fa-ghost">
+                    👻 Horror
+                </option>
+
+                <option value="fa-solid fa-earth-asia">
+                    🌏 Travel
+                </option>
+
+                <option value="fa-solid fa-palette">
+                    🎨 Art
+                </option>
+
+                <option value="fa-solid fa-tag">
+                    🏷️ Other
+                </option>
+
+            </select>
+
+            <button type="submit">
+                Add Category
+            </button>
+
+        </form>
+
+        <!-- Category Grid -->
+        <div class="category-grid" id="categoryGrid"></div>
+
+    </div>
+
+</div>
+
+<!-- Toast -->
+<div id="catToast"></div>
+
+<script src="{{ url_for('static', filename='js/categories.js') }}"></script>
+
+</body>
+
+{% endblock %}

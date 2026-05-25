@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard | Book Store{% endblock %}
+
+{% block body %}
+
+<body class="admin-page">
+
+<!-- Sidebar -->
+<div class="sidebar">
+
+    <div class="sidebar-logo">
+        Book<span>Store</span>
+    </div>
+
+    <ul>
+
+        <li>
+            <a href="{{ url_for('admin_dashboard') }}" class="active">
+                <i class="fa-solid fa-chart-line"></i>
+                Dashboard
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('add_books') }}">
+                <i class="fa-solid fa-book"></i>
+                Books
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('categories') }}">
+                <i class="fa-solid fa-layer-group"></i>
+                Categories
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('orders') }}">
+                <i class="fa-solid fa-cart-shopping"></i>
+                Orders
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('customers') }}">
+                <i class="fa-solid fa-users"></i>
+                Customers
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('admin_login') }}">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('home') }}">
+                <i class="fa-solid fa-globe"></i>
+                Front Page
+            </a>
+        </li>
+
+    </ul>
+
+</div>
+
+<!-- Main -->
+<div class="main">
+
+    <!-- Topbar -->
+    <div class="topbar">
+        <h1>Admin Dashboard</h1>
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="cards">
+
+        <div class="card">
+            <i class="fa-solid fa-book"></i>
+            <h2 id="totalBooks">250+</h2>
+            <p>Total Books</p>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <h2 id="totalOrders">0</h2>
+            <p>Total Orders</p>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-users"></i>
+            <h2 id="totalCustomers">0</h2>
+            <p>Customers</p>
+        </div>
+
+        <div class="card">
+            <i class="fa-solid fa-layer-group"></i>
+            <h2 id="totalCategories">8</h2>
+            <p>Categories</p>
+        </div>
+
+    </div>
+
+    <!-- Recent Books -->
+    <div class="add-books-section" id="manage-books">
+
+        <h2>Recent Added Books</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Book Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="recentBooksTable">
+
+                <tr>
+                    <td>Atomic Habits</td>
+                    <td>Motivation</td>
+                    <td>₹599</td>
+                    <td>
+                        <span class="status available">
+                            Available
+                        </span>
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+
+</body>
+
+{% endblock %}

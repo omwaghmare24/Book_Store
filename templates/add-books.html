@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Books | Admin{% endblock %}
+
+{% block body %}
+
+<link rel="stylesheet"href="{{ url_for('static', filename='css/book.css') }}">
+
+<body class="admin-page">
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <div class="sidebar-logo">
+        Book<span>Store</span>
+    </div>
+
+    <ul>
+        <li>
+            <a href="{{ url_for('admin_dashboard') }}">
+                <i class="fa-solid fa-chart-line"></i> Dashboard
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('add_books') }}" class="active">
+                <i class="fa-solid fa-book"></i> Books
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('categories') }}">
+                <i class="fa-solid fa-layer-group"></i> Categories
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('orders') }}">
+                <i class="fa-solid fa-cart-shopping"></i> Orders
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('customers') }}">
+                <i class="fa-solid fa-users"></i> Customers
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('admin_login') }}">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('home') }}">
+                <i class="fa-solid fa-globe"></i> Front Page
+            </a>
+        </li>
+    </ul>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+    <div class="topbar">
+        <h1 id="pageTitle">Books</h1>
+    </div>
+
+    <div class="add-book-page">
+
+        <h2 id="formHeading">Add New Book</h2>
+
+        <form class="book-form" onsubmit="saveBook(event)">
+
+            <input type="hidden" id="editIndex" value="-1">
+
+            <input type="text"
+                   id="bookName"
+                   placeholder="Book Name *"
+                   required>
+
+            <input type="text"
+                   id="authorName"
+                   placeholder="Author Name *"
+                   required>
+
+            <select id="bookCategory" required>
+                <option value="">-- Select Category --</option>
+            </select>
+
+            <input type="number"
+                   id="bookPrice"
+                   placeholder="Price (₹) *"
+                   min="1"
+                   required>
+
+            <input type="url"
+                   id="bookImage"
+                   placeholder="Book Cover Image URL *"
+                   required>
+
+            <img id="imgPreview"
+                 class="img-preview"
+                 src=""
+                 alt="Preview">
+
+            <textarea id="bookDesc"
+                      placeholder="Short Description"
+                      rows="3"></textarea>
+
+            <button type="submit" id="submitBtn">
+                Add Book
+            </button>
+
+            <button type="button"
+                    class="cancel-btn"
+                    id="cancelBtn"
+                    onclick="cancelEdit()">
+                Cancel
+            </button>
+
+        </form>
+
+        <!-- Books Table -->
+        <div class="table-header">
+
+            <h3>
+                All Books (<span id="bookCount">0</span>)
+            </h3>
+
+            <input class="tbl-search"
+                   id="searchInput"
+                   placeholder="Search books…"
+                   oninput="renderTable()">
+
+        </div>
+
+        <table class="books-list-table">
+
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Book</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody id="booksTableBody"></tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<div id="abToast"></div>
+
+<script src="{{ url_for('static', filename='js/add-books.js') }}"></script>
+
+</body>
+
+{% endblock %}

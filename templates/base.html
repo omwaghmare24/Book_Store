@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{% block title %}Book Store{% endblock %}</title>
+
+  <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/book.css') }}">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  {% block extra_css %}{% endblock %}
+
+</head>
+
+{% block body %}
+
+<body>
+
+  <!-- Navbar -->
+  <nav>
+
+    <a href="{{ url_for('home') }}" class="logo">
+      Book<span>Store</span>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+
+      <li><a href="{{ url_for('home') }}">Home</a></li>
+      <li><a href="{{ url_for('home') }}#about">About</a></li>
+      <li><a href="{{ url_for('home') }}#books">Books</a></li>
+      <li><a href="{{ url_for('home') }}#categories">Categories</a></li>
+      <li><a href="{{ url_for('home') }}#best-sellers">Best Sellers</a></li>
+      <li><a href="{{ url_for('home') }}#contact">Contact</a></li>
+
+      <li>
+        <a href="{{ url_for('admin_login') }}" class="admin-btn">
+          Admin
+        </a>
+      </li>
+
+    </ul>
+
+    <button class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </nav>
+
+  <!-- Page Content -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 <span>BookStore</span> All Rights Reserved.</p>
+  </footer>
+
+  <!-- Toast -->
+  <div id="toastMsg"></div>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+  {% block extra_js %}{% endblock %}
+
+</body>
+
+{% endblock %}
+
+</html>
